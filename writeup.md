@@ -22,13 +22,13 @@ The goals / steps of this project are the following:
 
 ### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
 
-My pipeline can be found as a function called `lane_finder`. It consisted of 5 steps. First, I converted the images to grayscale, and then I apply a gaussian filter to blur the image so we can smooth the edges. For that, I have used a kernel size of 5, since it gave me a good result on test images.
+My pipeline can be found as a function called `lane_finder`. It consisted of 5 steps. First, I converted the images to grayscale, and then I applied a gaussian filter to blur the image so we could smooth the edges. For that, I have used a kernel size of 5, since it gave me a good result on test images.
 
 ![Blur images][blur]
 
 We find the edges on the blurry image using the Canny transform within the thresholds 50 and 150.
 
-Since we are interested on lane and we have a fixed camera, we apply a clipping mask in order to isolate only the lane perspective. This an example result of one the test images
+Since we are interested on the lane and we have a fixed camera, we apply a clipping mask in order to isolate only the lane perspective. This an example result on one the test images
 
 ![masked images with edges][masked]
 
@@ -44,7 +44,7 @@ As a result, we have a set of segments corresponding to the edges of lane lines.
 
 ![lined images with edges][lined]
 
-We want to find the lane where the car is driving. We need to know the left and the right lines for the lane. In order to find both lines, I have created a function called `average_lines`. This function loops through all the lines array from the Hough space. It is fair to say that all the lines we get corresponds to the lane lines. Due to the perspective, we can distinguish the left line from the right line according to the sign of the `slope < 0 ? left line : right line`.
+We want to find the lane on where the car is driving. We need to know the left and the right lines for the lane. In order to find both lines, I have created a function called `average_lines`. This function loops through all the lines array from the Hough space. At this point, it is fair to say that all the lines we get corresponds to the lane lines. Due to the perspective, we can distinguish the left line from the right line according to the sign of the `slope < 0 ? left line : right line`.
 
 We have an array of `left_lines` and another of `right_lines`. Now, we want to find the left and right lines. We know already the top and bottom margins for both lines, which corresponds to the top and bottom of our mask. So the only value unknown is the slope.
 
